@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <nav className="navbar">
       <div className="logo">MyCompany</div>
 
-      {/* Mobile toggle */}
-      <input type="checkbox" id="menu-toggle" />
-      <label htmlFor="menu-toggle" className="menu-icon">&#9776;</label>
+      <div className={`nav-links ${isOpen ? "active" : ""}`}>
+        <a href="#home" onClick={() => setIsOpen(false)}>Home</a>
+        <a href="#about" onClick={() => setIsOpen(false)}>About</a>
+        <a href="#services" onClick={() => setIsOpen(false)}>Services</a>
+        <a href="#testimonials" onClick={() => setIsOpen(false)}>Testimonials</a>
+        <a href="#contact" onClick={() => setIsOpen(false)}>Contact</a>
+      </div>
 
-      {/* Navigation links */}
-      <ul className="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li>
-          <a href="#contact" className="contact-btn">Contact</a>
-        </li>
-      </ul>
+      <div
+        className={`hamburger ${isOpen ? "open" : ""}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </nav>
   );
 };

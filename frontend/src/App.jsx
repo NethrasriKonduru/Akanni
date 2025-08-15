@@ -1,16 +1,17 @@
 import React from "react";
 import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
+import Hero from "./components/Hero";
 import Services from "./components/Services";
 import Testimonials from "./components/Testimonials";
-
+import Footer from "./components/Footer";
 const App = () => {
   return (
     <>
       <Navbar />
-      <HeroSection/>
-      <Services/>
-      <Testimonials/>
+      <Hero/>
+     <Services/>
+     <Testimonials/>
+     <Footer/>
     </>
   );
 };

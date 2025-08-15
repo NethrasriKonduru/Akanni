@@ -1,43 +1,84 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./Services.css";
 
-const Services = () => {
-  const scrollRef = useRef(null);
+const services = [
+  { title: "Web Development", desc: "Modern, responsive websites." },
+  { title: "UI/UX Design", desc: "Clean, user-centric interfaces." },
+  { title: "Branding", desc: "Logos, color systems, identity." },
+  { title: "SEO & Analytics", desc: "Get found. Learn from data." },
+  { title: "E-Commerce", desc: "Shops, carts, payments." },
+  { title: "Mobile Apps", desc: "iOS & Android experiences." },
+  { title: "Cloud & DevOps", desc: "Deploys, CI/CD, reliability." },
+  { title: "Support & Maintenance", desc: "Keep things running smooth." },
+];
 
-  const scroll = (direction) => {
-    if (direction === "left") {
-      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
-    } else {
-      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
-    }
+export default function Services() {
+  const trackRef = useRef(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(true);
+
+  const CARD_WIDTH = 280; // card width + gap (approx)
+  const SCROLL_PIXELS = CARD_WIDTH * 2; // scroll 2 cards per click
+
+  const updateButtons = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    setCanLeft(el.scrollLeft > 0);
+    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
   };
 
-  const servicesData = [
-    { title: "Web Development", description: "Build responsive and modern websites.", img: "https://via.placeholder.com/200" },
-    { title: "App Development", description: "Mobile apps for Android and iOS.", img: "https://via.placeholder.com/200" },
-    { title: "UI/UX Design", description: "Beautiful and intuitive designs.", img: "https://via.placeholder.com/200" },
-    { title: "SEO Optimization", description: "Improve your search rankings.", img: "https://via.placeholder.com/200" },
-    { title: "Cloud Services", description: "Secure and scalable cloud solutions.", img: "https://via.placeholder.com/200" },
-  ];
+  const scrollByAmount = (amount) => {
+    trackRef.current?.scrollBy({ left: amount, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    updateButtons();
+    const onScroll = () => updateButtons();
+    const onResize = () => updateButtons();
+    el.addEventListener("scroll", onScroll);
+    window.addEventListener("resize", onResize);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
 
   return (
-    <div className="services-section">
-      <h2 className="services-heading">Our Services</h2>
-      <div className="services-wrapper">
-        <button className="scroll-btn left" onClick={() => scroll("left")}>&lt;</button>
-        <div className="services-container" ref={scrollRef}>
-          {servicesData.map((service, index) => (
-            <div className="service-card" key={index}>
-              <img src={service.img} alt={service.title} />
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
-            </div>
-          ))}
+    <section className="services-section" id="services">
+      <div className="services-header">
+        <h2>Our Services</h2>
+        <div className="controls">
+          <button
+            className="arrow left"
+            onClick={() => scrollByAmount(-SCROLL_PIXELS)}
+            disabled={!canLeft}
+            aria-label="Scroll services left"
+          >
+            ‹
+          </button>
+          <button
+            className="arrow right"
+            onClick={() => scrollByAmount(SCROLL_PIXELS)}
+            disabled={!canRight}
+            aria-label="Scroll services right"
+          >
+            ›
+          </button>
         </div>
-        <button className="scroll-btn right" onClick={() => scroll("right")}>&gt;</button>
       </div>
-    </div>
-  );
-};
 
-export default Services;
+      <div className="services-track" ref={trackRef}>
+        {services.map((s, i) => (
+          <article className="service-card" key={i}>
+            <div className="icon-circle">{i + 1}</div>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+            <button className="card-btn">Learn more</button>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}

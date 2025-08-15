@@ -1,97 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .navbar {
-    width: 100%;
-    background: linear-gradient(135deg, #0f0220, #2a0e54);
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    flex-wrap: wrap;
-  }
-  
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  /* Default nav links (desktop) */
+  width: 100vw; /* Force full viewport width */
+  background: linear-gradient(135deg, #0f0220, #2a0e54);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 5%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap; /* Prevent overflow */
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #f0a500;
+}
+
+/* Hamburger menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger span {
+  background: white;
+  height: 3px;
+  width: 25px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
   .nav-links {
-    list-style: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: #444;
+    flex-direction: column;
+    width: 100vw; /* Full width on mobile too */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  .nav-links.active {
+    max-height: 300px;
+  }
+
+  .hamburger {
     display: flex;
-    gap: 20px;
-    align-items: center;
   }
-  
-  .nav-links li a {
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
-    transition: color 0.3s ease;
-  }
-  
-  .nav-links li a:hover {
-    color: #ff9800;
-  }
-  
-  /* Contact button style */
-  .contact-btn {
-    background: #4c3ffd;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    color: white;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  
-  .contact-btn:hover {
-    background: #6b5bff;
-  }
-  
-  /* Hamburger icon */
-  .menu-icon {
-    display: none;
-    font-size: 2rem;
-    cursor: pointer;
-  }
-  
-  #menu-toggle {
-    display: none;
-  }
-  
-  /* Mobile styles */
-  @media (max-width: 768px) {
-    .menu-icon {
-      display: block;
-    }
-  
-    /* Hide links initially */
-    .nav-links {
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background: linear-gradient(135deg, #0f0220, #2a0e54);
-      flex-direction: column;
-      width: 100%;
-      height: auto;
-      transform: translateY(-300%);
-      transition: transform 0.3s ease-in-out;
-      padding: 20px 0;
-      z-index: 999;
-    }
-  
-    /* Show links when menu checked */
-    #menu-toggle:checked + .menu-icon + .nav-links {
-      transform: translateY(0);
-    }
-  
-    .nav-links li {
-      text-align: center;
-      padding: 15px 0;
-    }
-  }
-  
+}
