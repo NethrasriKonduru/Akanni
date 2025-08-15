@@ -1,84 +1,108 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Services.css";
 
-const services = [
-  { title: "Web Development", desc: "Modern, responsive websites." },
-  { title: "UI/UX Design", desc: "Clean, user-centric interfaces." },
-  { title: "Branding", desc: "Logos, color systems, identity." },
-  { title: "SEO & Analytics", desc: "Get found. Learn from data." },
-  { title: "E-Commerce", desc: "Shops, carts, payments." },
-  { title: "Mobile Apps", desc: "iOS & Android experiences." },
-  { title: "Cloud & DevOps", desc: "Deploys, CI/CD, reliability." },
-  { title: "Support & Maintenance", desc: "Keep things running smooth." },
-];
-
 export default function Services() {
-  const trackRef = useRef(null);
-  const [canLeft, setCanLeft] = useState(false);
-  const [canRight, setCanRight] = useState(true);
+  const [selected, setSelected] = useState(null);
 
-  const CARD_WIDTH = 280; // card width + gap (approx)
-  const SCROLL_PIXELS = CARD_WIDTH * 2; // scroll 2 cards per click
-
-  const updateButtons = () => {
-    const el = trackRef.current;
-    if (!el) return;
-    setCanLeft(el.scrollLeft > 0);
-    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
-  };
-
-  const scrollByAmount = (amount) => {
-    trackRef.current?.scrollBy({ left: amount, behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    updateButtons();
-    const onScroll = () => updateButtons();
-    const onResize = () => updateButtons();
-    el.addEventListener("scroll", onScroll);
-    window.addEventListener("resize", onResize);
-    return () => {
-      el.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
+  const services = [
+    {
+      title: "AI Graphic Designing & Prompt Engineering",
+      icon: "🎨",
+      points: [
+        "AI-powered graphic design",
+        "Branding & visual identity creation",
+        "Custom AI art & creative prompts",
+        "Social media creatives & ad banners"
+      ]
+    },
+    {
+      title: "Web Designing & UI/UX Designing (Figma & Prototyping)",
+      icon: "💻",
+      points: [
+        "Responsive website development",
+        "UI/UX design for websites & mobile apps",
+        "Interactive prototypes in Figma",
+        "Landing page creation",
+        "Portfolio & e-commerce websites"
+      ]
+    },
+    {
+      title: "Digital Marketing & Content Creation",
+      icon: "📢",
+      points: [
+        "Social media management",
+        "SEO & SEM campaigns",
+        "Influencer collaborations",
+        "Blog, script & copywriting",
+        "Video editing & reels production"
+      ]
+    },
+    {
+      title: "Research, Analytics & Consultancy",
+      icon: "📊",
+      points: [
+        "Market research & competitor analysis",
+        "Data-driven strategy building",
+        "Business growth consultation",
+        "Trend forecasting"
+      ]
+    },
+    {
+      title: "Cybersecurity Solutions & Auditing",
+      icon: "🛡️",
+      points: [
+        "Website & app vulnerability testing",
+        "Data protection & encryption solutions",
+        "Cyber risk assessment",
+        "Security training & awareness programs"
+      ]
+    }
+  ];
 
   return (
-    <section className="services-section" id="services">
-      <div className="services-header">
-        <h2>Our Services</h2>
-        <div className="controls">
-          <button
-            className="arrow left"
-            onClick={() => scrollByAmount(-SCROLL_PIXELS)}
-            disabled={!canLeft}
-            aria-label="Scroll services left"
-          >
-            ‹
-          </button>
-          <button
-            className="arrow right"
-            onClick={() => scrollByAmount(SCROLL_PIXELS)}
-            disabled={!canRight}
-            aria-label="Scroll services right"
-          >
-            ›
-          </button>
-        </div>
-      </div>
+    <section className="services-section">
+      <h2 className="services-title">Our Services</h2>
 
-      <div className="services-track" ref={trackRef}>
-        {services.map((s, i) => (
-          <article className="service-card" key={i}>
-            <div className="icon-circle">{i + 1}</div>
-            <h3>{s.title}</h3>
-            <p>{s.desc}</p>
-            <button className="card-btn">Learn more</button>
-          </article>
+      <div className="services-wrapper">
+        {services.map((svc, i) => (
+          <div
+            className="service-card"
+            key={i}
+            onMouseEnter={() => setSelected(svc)}
+            onMouseLeave={() => setSelected(null)}
+          >
+            <div className="service-icon">{svc.icon}</div>
+            <h3>{svc.title}</h3>
+          </div>
         ))}
       </div>
+
+      {selected && (
+        <div
+          className="service-overlay"
+          onMouseEnter={() => setSelected(selected)}
+          onMouseLeave={() => setSelected(null)}
+        >
+          <div
+            className="service-details"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="close-btn"
+              onClick={() => setSelected(null)}
+            >
+              &times;
+            </button>
+            <div className="service-icon">{selected.icon}</div>
+            <h3>{selected.title}</h3>
+            <ul>
+              {selected.points.map((p, idx) => (
+                <li key={idx}>{p}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
