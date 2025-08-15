@@ -1,67 +1,63 @@
-.testimonial-section {
-  position: relative;
-  background-image: url("./background.jpg"); /* Change to your image */
-  background-size: cover;
-  background-position: center;
-  padding: 100px 20px;
+.testimonials-section {
+  padding: 50px 20px;
+  background-color: #2d014d; /* Same section background as services */
+  text-align: center;
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.2); /* subtle dark overlay */
+.testimonials-title {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 30px;
 }
 
-.testimonial-container {
-  position: relative;
+.testimonials-carousel {
   display: flex;
-  justify-content: center;
   gap: 20px;
-  flex-wrap: wrap;
-  z-index: 1;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+
+.testimonials-carousel::-webkit-scrollbar {
+  display: none;
 }
 
 .testimonial-card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 10px;
+  background: #4a2a6a; /* Dark purple card background like Services */
+  color: white;
+  border-radius: 15px;
   padding: 20px;
-  max-width: 250px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.3s ease;
+  width: 250px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  text-align: left;
 }
 
-.testimonial-card:hover {
-  transform: translateY(-5px);
-}
-
-.testimonial-card img {
-  width: 70px;
-  height: 70px;
+.testimonial-avatar {
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  object-fit: cover;
   margin-bottom: 10px;
 }
 
-.testimonial-card h3 {
-  margin: 5px 0;
-  font-size: 16px;
-  font-weight: bold;
+.role {
+  font-size: 0.85rem;
+  color: #ccc;
 }
 
 .stars {
   color: gold;
-  margin: 5px 0;
+  font-size: 1.2rem;
 }
 
-.testimonial-card p {
-  font-size: 14px;
-  color: #555;
-  text-align: center;
+.video-card {
+  padding: 0;
 }
+
+.testimonial-video {
+  width: 100%;
+  height: auto;
+  border-radius: 15px 15px 0 0;
+}
+
 
