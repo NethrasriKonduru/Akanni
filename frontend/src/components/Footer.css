@@ -1,79 +1,92 @@
 .footer {
-    background: #111;
-    color: #fff;
-    width: 100vw;
-    padding-top: 40px;
+    position: relative;
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center/cover;
+    padding: 40px 20px 20px;
+    color: white;
+    font-family: Arial, sans-serif;
   }
   
-  .footer-content {
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 50, 0.8); /* Dark blue transparent */
+    z-index: 0;
+  }
+  
+  .container {
+    position: relative;
+    z-index: 1;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
     flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 5%;
+    max-width: 1100px;
+    margin: auto;
   }
   
-  .footer-brand {
-    flex: 1;
-    min-width: 200px;
+  .footer-col {
+    flex: 1 1 250px;
+    margin: 20px;
   }
   
-  .footer-brand h2 {
+  .footer-logo {
+    font-size: 28px;
+  }
+  
+  .social-icons a {
+    margin-right: 10px;
+    font-size: 18px;
+    color: white;
+    transition: 0.3s;
+  }
+  
+  .social-icons a:hover {
+    color: #00aced;
+  }
+  
+  .footer-col h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+  
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-col ul li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-col ul li a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  
+  .footer-col ul li a:hover {
+    color: #00aced;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
     margin-bottom: 10px;
   }
   
-  .footer-links {
-    flex: 1;
-    min-width: 200px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .footer-links a {
-    color: #aaa;
-    text-decoration: none;
-    transition: color 0.2s ease-in-out;
-  }
-  
-  .footer-links a:hover {
-    color: #f0a500;
-  }
-  
-  .footer-social {
-    flex: 1;
-    min-width: 200px;
-    display: flex;
-    gap: 15px;
-    font-size: 1.2rem;
-  }
-  
-  .footer-social a {
-    color: #aaa;
-    transition: color 0.2s ease-in-out;
-  }
-  
-  .footer-social a:hover {
-    color: #f0a500;
+  .contact-item svg {
+    margin-right: 8px;
   }
   
   .footer-bottom {
-    border-top: 1px solid #333;
     text-align: center;
     padding: 15px 0;
-    font-size: 0.9rem;
-    color: #aaa;
+    font-size: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
   }
-  
-  /* Responsive layout */
-  @media (max-width: 768px) {
-    .footer-content {
-      flex-direction: column;
-      text-align: center;
-      align-items: center;
-      gap: 20px;
-    }
-  }
-  
+ 
