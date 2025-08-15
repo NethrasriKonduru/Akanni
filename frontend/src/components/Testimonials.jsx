@@ -1,40 +1,73 @@
 import React from "react";
-import "./testimonials.css";
+import "./Testimonials.css";
+import shoeImage from "../assets/shoe.jpg"; // Background if needed
 
-const testimonialsData = [
+// Text Testimonials
+const textTestimonials = [
   {
     name: "John Doe",
-    image: "person1.jpg",
-    rating: 5,
-    text: "This product changed my life! The quality and service were beyond expectations."
+    role: "Entrepreneur",
+    image: "https://via.placeholder.com/80",
+    text: "I highly recommend them! The work was excellent.",
+    rating: 5
   },
   {
     name: "Sarah Lee",
-    image: "person2.jpg",
-    rating: 4,
-    text: "Excellent experience overall. I will definitely recommend it to my friends."
+    role: "CEO, Company",
+    image: "https://via.placeholder.com/80",
+    text: "Great service and quick delivery. Really impressed!",
+    rating: 4
   },
   {
-    name: "Michael Smith",
-    image: "person3.jpg",
-    rating: 5,
-    text: "Great quality and very stylish. Fits perfectly with my expectations."
+    name: "Tom Hanks",
+    role: "Actor",
+    image: "https://via.placeholder.com/80",
+    text: "They made the process so easy and stress-free.",
+    rating: 5
+  }
+];
+
+// Video Testimonials
+const videoTestimonials = [
+  {
+    name: "Alice Johnson",
+    role: "Designer",
+    video: "/videos/review1.mp4"
+  },
+  {
+    name: "Mark Smith",
+    role: "Developer",
+    video: "/videos/review2.mp4"
   }
 ];
 
 const Testimonials = () => {
   return (
-    <section className="testimonial-section">
-      <div className="overlay"></div>
-      <div className="testimonial-container">
-        {testimonialsData.map((t, index) => (
-          <div className="testimonial-card" key={index}>
-            <img src={t.image} alt={t.name} />
-            <h3>{t.name}</h3>
-            <div className="stars">
-              {"★".repeat(t.rating) + "☆".repeat(5 - t.rating)}
-            </div>
-            <p>{t.text}</p>
+    <section className="testimonials-section">
+      <h2 className="testimonials-title">What Our Clients Say</h2>
+      <div className="testimonials-carousel">
+        {textTestimonials.map((t, index) => (
+          <div className="testimonial-card" key={`text-${index}`}>
+            <img src={t.image} alt={t.name} className="testimonial-avatar" />
+            <h4>{t.name}</h4>
+            <p className="role">{t.role}</p>
+            <p className="text">{t.text}</p>
+            <p className="stars">{"⭐".repeat(t.rating)}</p>
+          </div>
+        ))}
+
+        {videoTestimonials.map((v, index) => (
+          <div className="testimonial-card video-card" key={`video-${index}`}>
+            <video
+              src={v.video}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="testimonial-video"
+            />
+            <h4>{v.name}</h4>
+            <p className="role">{v.role}</p>
           </div>
         ))}
       </div>
@@ -43,4 +76,5 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
+
 
