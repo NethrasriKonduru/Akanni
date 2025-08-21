@@ -12,22 +12,21 @@ import {
 export default function Footer() {
   return (
     <footer className="footer">
-      <div className="overlay"></div> {/* Transparent layer */}
       <div className="container">
+
         
-        {/* First Column */}
         <div className="footer-col">
-          <h1 className="footer-logo" style={{fontWeight: "bold" }}>Akkani</h1>
+          <h1 className="footer-logo" style={{ fontWeight: "bold" }}>Akanni</h1>
           <h4>One stop solution for all content needs</h4>
-          <h3 style={{fontWeight: "bold" }}>Create, Elevate, Innovate</h3>
+          <h3 style={{ fontWeight: "bold" }}>Create, Elevate, Innovate</h3>
           <div className="social-icons">
-            <a href="#"><FaTwitter /></a>
-            <a href="#"><FaFacebookF /></a>
-            <a href="#"><FaInstagram /></a>
+            <a href="#" className="social-twitter"><FaTwitter /></a>
+            <a href="#" className="social-facebook"><FaFacebookF /></a>
+            <a href="#" className="social-instagram"><FaInstagram /></a>
           </div>
         </div>
 
-        {/* Second Column */}
+        
         <div className="footer-col">
           <h2>Quick Links</h2>
           <ul>
@@ -40,17 +39,17 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Third Column */}
+        
         <div className="footer-col">
           <h2>Have a Question?</h2>
           <div className="contact-item">
-            <FaMapMarkerAlt /> Kothrud, Pune 411038
+            <FaMapMarkerAlt className="contact-icon" /> Kothrud, Pune 411038
           </div>
           <div className="contact-item">
-            <FaPhoneAlt /> +9004138118
+            <FaPhoneAlt className="contact-icon" /> +9004138118
           </div>
           <div className="contact-item">
-            <FaPaperPlane /> team.akkani@gmail.com
+            <FaPaperPlane className="contact-icon" /> team.akkani@gmail.com
           </div>
         </div>
 
