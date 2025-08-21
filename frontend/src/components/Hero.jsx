@@ -1,16 +1,17 @@
 import React from "react";
 import "./Hero.css";
 
-const Hero = () => {
+export default function Hero() {
   return (
     <section className="hero">
-      <div className="hero-content">
-        <h1>Welcome to MyCompany</h1>
-        <p>We help you achieve your dreams with our amazing services.</p>
-        <button>Get Started</button>
+      <div className="hero-container">
+        <div className="hero-text">
+          <h1>Àkanní</h1>
+          <p><strong>
+          Powering Your Digital World with Cloud-Driven Excellence</strong>
+          </p>
+        </div>
       </div>
     </section>
   );
-};
-
-export default Hero;
+}

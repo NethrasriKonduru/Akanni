@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 import "./Services.css";
+import { 
+  FaPalette, 
+  FaLaptopCode, 
+  FaBullhorn, 
+  FaChartLine, 
+  FaShieldAlt 
+} from "react-icons/fa";
 
 export default function Services() {
   const [selected, setSelected] = useState(null);
@@ -7,96 +14,90 @@ export default function Services() {
   const services = [
     {
       title: "AI Graphic Designing & Prompt Engineering",
-      icon: "🎨",
+      icon: <FaPalette />,
       points: [
         "AI-powered graphic design",
         "Branding & visual identity creation",
         "Custom AI art & creative prompts",
-        "Social media creatives & ad banners"
-      ]
+        "Social media creatives & ad banners",
+      ],
     },
     {
       title: "Web Designing & UI/UX Designing (Figma & Prototyping)",
-      icon: "💻",
+      icon: <FaLaptopCode />,
       points: [
         "Responsive website development",
         "UI/UX design for websites & mobile apps",
         "Interactive prototypes in Figma",
         "Landing page creation",
-        "Portfolio & e-commerce websites"
-      ]
+        "Portfolio & e-commerce websites",
+      ],
     },
     {
       title: "Digital Marketing & Content Creation",
-      icon: "📢",
+      icon: <FaBullhorn />,
       points: [
         "Social media management",
         "SEO & SEM campaigns",
         "Influencer collaborations",
         "Blog, script & copywriting",
-        "Video editing & reels production"
-      ]
+        "Video editing & reels production",
+      ],
     },
     {
       title: "Research, Analytics & Consultancy",
-      icon: "📊",
+      icon: <FaChartLine />,
       points: [
         "Market research & competitor analysis",
         "Data-driven strategy building",
         "Business growth consultation",
-        "Trend forecasting"
-      ]
+        "Trend forecasting",
+      ],
     },
     {
       title: "Cybersecurity Solutions & Auditing",
-      icon: "🛡️",
+      icon: <FaShieldAlt />,
       points: [
         "Website & app vulnerability testing",
         "Data protection & encryption solutions",
         "Cyber risk assessment",
-        "Security training & awareness programs"
-      ]
-    }
+        "Security training & awareness programs",
+      ],
+    },
   ];
 
   return (
     <section className="services-section">
       <h2 className="services-title">Our Services</h2>
-
-      <div className="services-wrapper">
-        {services.map((svc, i) => (
+      <div className="services-circle-container">
+        {services.map((svc, index) => (
           <div
-            className="service-card"
-            key={i}
-            onMouseEnter={() => setSelected(svc)}
-            onMouseLeave={() => setSelected(null)}
+            key={index}
+            className="service-circle"
+            onClick={() => setSelected(index)}
           >
-            <div className="service-icon">{svc.icon}</div>
-            <h3>{svc.title}</h3>
+            <div className="circle-icon">{svc.icon}</div>
+            <span className="circle-title">{svc.title}</span>
           </div>
         ))}
       </div>
 
-      {selected && (
+      {selected !== null && (
         <div
           className="service-overlay"
-          onMouseEnter={() => setSelected(selected)}
-          onMouseLeave={() => setSelected(null)}
+          onClick={() => setSelected(null)}
         >
           <div
             className="service-details"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              className="close-btn"
-              onClick={() => setSelected(null)}
-            >
+            <button className="close-btn" onClick={() => setSelected(null)}>
               &times;
             </button>
-            <div className="service-icon">{selected.icon}</div>
-            <h3>{selected.title}</h3>
+            <div className="service-icon-large">{services[selected].icon}</div>
+            <h3>{services[selected].title}</h3>
             <ul>
-              {selected.points.map((p, idx) => (
+              {services[selected].points.map((p, idx) => (
                 <li key={idx}>{p}</li>
               ))}
             </ul>

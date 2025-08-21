@@ -1,70 +1,80 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.navbar {
+  width: 100%;
+  background: black;
+  padding: 1rem 2%; 
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
 }
 
-.navbar {
-  width: 100vw; /* Force full viewport width */
-  background: linear-gradient(135deg, #0f0220, #2a0e54);
-  color: white;
+.nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 5%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.logo {
-  font-size: 1.5rem;
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  border: 2px solid #f0a500;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.logo-text {
+  font-size: 1.6rem;
   font-weight: bold;
+  color: white;
 }
-
+.logo-img.big {
+  width: 150px;           /* bigger size */
+  height: 150px;
+}
 .nav-links {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap; /* Prevent overflow */
+  list-style: none;
+  gap: 1.2rem;
 }
 
-.nav-links a {
+.nav-links li {
+  cursor: pointer;
+  font-weight: 500;
   color: white;
-  text-decoration: none;
-  font-size: 1rem;
   transition: color 0.3s;
 }
 
-.nav-links a:hover {
+.nav-links li:hover {
   color: #f0a500;
 }
 
-/* Hamburger menu */
-.hamburger {
+.mobile-menu-icon {
   display: none;
-  flex-direction: column;
+  font-size: 1.5rem;
   cursor: pointer;
-  gap: 5px;
+  color: white;
 }
 
-.hamburger span {
-  background: white;
-  height: 3px;
-  width: 25px;
-  border-radius: 5px;
-  transition: 0.3s;
-}
-
-/* Mobile styles */
 @media (max-width: 768px) {
   .nav-links {
     position: absolute;
-    top: 60px;
-    left: 0;
-    background: #444;
+    top: 100%;
+    right: 0;
+    background: linear-gradient(135deg,#0f0220,#2a0e54);
     flex-direction: column;
-    width: 100vw; /* Full width on mobile too */
+    width: 100%;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
@@ -74,7 +84,12 @@
     max-height: 300px;
   }
 
-  .hamburger {
-    display: flex;
+  .nav-links li {
+    margin: 1rem 0;
+    font-size: 1.2rem;
+  }
+
+  .mobile-menu-icon {
+    display: block;
   }
 }
