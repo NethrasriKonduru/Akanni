@@ -1,80 +1,79 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./Testimonials.css";
-import shoeImage from "../assets/shoe.jpg"; // Background if needed
 
-// Text Testimonials
-const textTestimonials = [
-  {
-    name: "John Doe",
-    role: "Entrepreneur",
-    image: "https://via.placeholder.com/80",
-    text: "I highly recommend them! The work was excellent.",
-    rating: 5
-  },
-  {
-    name: "Sarah Lee",
-    role: "CEO, Company",
-    image: "https://via.placeholder.com/80",
-    text: "Great service and quick delivery. Really impressed!",
-    rating: 4
-  },
-  {
-    name: "Tom Hanks",
-    role: "Actor",
-    image: "https://via.placeholder.com/80",
-    text: "They made the process so easy and stress-free.",
-    rating: 5
-  }
-];
+// Example images stored in public folder or imported
+import client1 from "./images/client1.jpg";
+import client2 from "./images/client2.jpg";
+import client3 from "./images/client3.jpg";
+import client4 from "./images/client4.jpg";
 
-// Video Testimonials
-const videoTestimonials = [
-  {
-    name: "Alice Johnson",
-    role: "Designer",
-    video: "/videos/review1.mp4"
-  },
-  {
-    name: "Mark Smith",
-    role: "Developer",
-    video: "/videos/review2.mp4"
-  }
-];
+export default function Testimonials() {
+  const wrapperRef = useRef(null);
 
-const Testimonials = () => {
+  const testimonials = [
+    {
+      name: "Sravani Irigela",
+      role: "Entrepreneur",
+      feedback:
+        "Amazing service! The AI graphics and web designs exceeded my expectations.",
+      image: client1,
+    },
+    {
+      name: "John Doe",
+      role: "Marketing Manager",
+      feedback:
+        "Their digital marketing strategies boosted our engagement significantly.",
+      image: client2,
+    },
+    {
+      name: "Jane Smith",
+      role: "Startup Founder",
+      feedback:
+        "Consultancy and analytics helped us make data-driven decisions effortlessly.",
+      image: client3,
+    },
+    {
+      name: "Alex Johnson",
+      role: "Cybersecurity Head",
+      feedback:
+        "Professional security auditing with detailed reports and actionable insights.",
+      image: client4,
+    },
+  ];
+
+  const scroll = (direction) => {
+    if (wrapperRef.current) {
+      wrapperRef.current.scrollBy({
+        left: direction === "left" ? -300 : 300,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <section className="testimonials-section">
       <h2 className="testimonials-title">What Our Clients Say</h2>
-      <div className="testimonials-carousel">
-        {textTestimonials.map((t, index) => (
-          <div className="testimonial-card" key={`text-${index}`}>
-            <img src={t.image} alt={t.name} className="testimonial-avatar" />
-            <h4>{t.name}</h4>
-            <p className="role">{t.role}</p>
-            <p className="text">{t.text}</p>
-            <p className="stars">{"⭐".repeat(t.rating)}</p>
-          </div>
-        ))}
 
-        {videoTestimonials.map((v, index) => (
-          <div className="testimonial-card video-card" key={`video-${index}`}>
-            <video
-              src={v.video}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="testimonial-video"
-            />
-            <h4>{v.name}</h4>
-            <p className="role">{v.role}</p>
-          </div>
-        ))}
+      <div className="testimonials-container">
+        <button className="scroll-btn left" onClick={() => scroll("left")}>
+          &#8592;
+        </button>
+
+        <div className="testimonials-wrapper" ref={wrapperRef}>
+          {testimonials.map((t, i) => (
+            <div className="testimonial-card" key={i}>
+              <img src={t.image} alt={t.name} className="testimonial-img" />
+              <p className="feedback">"{t.feedback}"</p>
+              <h4 className="name">{t.name}</h4>
+              <span className="role">{t.role}</span>
+            </div>
+          ))}
+        </div>
+
+        <button className="scroll-btn right" onClick={() => scroll("right")}>
+          &#8594;
+        </button>
       </div>
     </section>
   );
-};
-
-export default Testimonials;
-
-
+}
