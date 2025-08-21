@@ -1,10 +1,6 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
 
-.content {
- /* Prevent navbar overlap */
-  height: 2000px; /* Just for scrolling demo */
-  background: linear-gradient(to bottom, #ece9e6, #ffffff);
+
+html, body {
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  font-family: Arial, sans-serif;
 }
