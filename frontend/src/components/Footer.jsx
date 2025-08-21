@@ -4,10 +4,9 @@ import {
   FaTwitter,
   FaFacebookF,
   FaInstagram,
-  FaPhoneAlt,
   FaPaperPlane,
 } from "react-icons/fa6";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaPhoneAlt,FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Footer() {
   return (
