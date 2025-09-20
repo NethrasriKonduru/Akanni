@@ -1,190 +1,33 @@
-.services-section {
-  min-width: 100%;
-  background: black;
-  color: white;
-  padding: 80px 20px; /* increased top-bottom padding for larger screens */
+.services {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns side by side */
+  gap: 20px; /* space between boxes */
+  padding: 40px;
+}
+.services-heading {
   text-align: center;
+  margin-bottom: 20px;
 }
-
-.services-title {
-  font-size: 2.2rem;
-  margin-bottom: 60px;
-}
-
-/* Circular layout container */
-.services-circle-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 50px;
-}
-
-/* Each service circle */
-.service-circle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-  width: 160px; /* fixed width for circles */
-}
-
-.service-circle:hover {
-  transform: scale(1.1);
-  opacity: 0.85;
-}
-
-/* Circle icon */
-.circle-icon {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1a1a3d, #0f0f26);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.8rem;
-  color: #00aaff;
-  margin-bottom: 15px;
-  transition: all 0.3s ease;
-}
-
-.circle-title {
-  font-weight: 500;
-  font-size: 1rem;
-  max-width: 150px;
-  line-height: 1.2rem;
-}
-
-/* Overlay modal */
-.service-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 50, 0.85);
-  backdrop-filter: blur(6px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  padding: 15px; /* small padding for mobile */
-}
-
-.service-details {
-  background: #1a1a3d;
-  border-radius: 12px;
+.service-card {
+  background-color: #f5f5f5;
   padding: 30px;
-  width: 400px;
-  max-width: 100%;
-  text-align: left;
-  animation: fadeIn 0.3s ease;
-  position: relative;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
 }
 
-.service-details h3 {
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.service-card h3 {
   margin-bottom: 15px;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
-.service-details ul {
-  padding-left: 20px;
-  font-size: 0.95rem;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.5rem;
-  color: white;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.service-icon-large {
-  font-size: 3rem;
-  color: #00aaff;
-  margin-bottom: 15px;
-}
-
-/* Fade in animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* Responsive styles */
-@media screen and (max-width: 1024px) {
-  .services-circle-container {
-    gap: 35px;
-  }
-  .service-circle {
-    width: 140px;
-  }
-  .circle-icon {
-    width: 90px;
-    height: 90px;
-    font-size: 2.3rem;
-  }
-  .circle-title {
-    font-size: 0.9rem;
-    max-width: 120px;
-  }
-  .service-details {
-    width: 350px;
-    padding: 25px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .services-section {
-    padding: 60px 15px;
-  }
-  .services-circle-container {
-    gap: 25px;
-  }
-  .service-circle {
-    width: 120px;
-  }
-  .circle-icon {
-    width: 80px;
-    height: 80px;
-    font-size: 2rem;
-  }
-  .circle-title {
-    font-size: 0.85rem;
-    max-width: 100px;
-  }
-  .service-details {
-    width: 90%;
-    padding: 20px;
-  }
-  .service-details h3 {
-    font-size: 1.2rem;
-  }
-  .service-details ul {
-    font-size: 0.85rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .services-circle-container {
-    gap: 15px;
-  }
-  .service-circle {
-    width: 100px;
-  }
-  .circle-icon {
-    width: 70px;
-    height: 70px;
-    font-size: 1.8rem;
-  }
-  .circle-title {
-    font-size: 0.8rem;
-    max-width: 90px;
-  }
+.service-card p {
+  color: #555;
+  font-size: 1rem;
 }
