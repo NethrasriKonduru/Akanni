@@ -7,6 +7,7 @@
 
 body, html {
   overflow-x: hidden; /* prevent horizontal scrolling */
+
 }
 
 /* Hero Section */
@@ -56,9 +57,108 @@ body, html {
 .hero-text h1 {
   font-size: clamp(2.5rem, 8vw, 6rem);
   font-weight: bold;
+
 }
 
 .hero-text p {
   font-size: clamp(1rem, 2vw, 1.5rem);
   margin-top: 1rem;
 }
+  
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  background: black;
+  padding: 1rem 2%; 
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* allows items to wrap on small screens */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  border: 2px solid #f0a500;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.logo-text {
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: bold;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.2rem;
+  flex-wrap: wrap; /* prevent overflow on small screens */
+}
+
+.nav-links li {
+  cursor: pointer;
+  font-weight: 500;
+  color: white;
+  transition: color 0.3s;
+}
+
+.nav-links li:hover {
+  color: #f0a500;
+}
+
+.mobile-menu-icon {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+}
+
+/* Mobile Menu */
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: linear-gradient(135deg,#0f0220,#2a0e54);
+    flex-direction: column;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  .nav-links.active {
+    max-height: 300px;
+  }
+
+  .nav-links li {
+    margin: 1rem 0;
+    font-size: 1.2rem;
+  }
+
+  .mobile-menu-icon {
+    display: block;
+  }
+}
+
