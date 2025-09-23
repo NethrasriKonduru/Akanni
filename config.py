@@ -1,20 +1,25 @@
 import os
+import json
 from pathlib import Path
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
-# Google OAuth2 credentials
-GOOGLE_CLIENT_CONFIG = {
-    "web": {
-        "client_id": os.getenv("GOOGLE_CLIENT_ID"),
-        "client_secret": os.getenv("GOOGLE_CLIENT_SECRET"),
-        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-        "token_uri": "https://oauth2.googleapis.com/token",
-        "redirect_uris": ["http://localhost:8000/auth/google/callback"]
-    }
-}
+# Load Google OAuth2 credentials from JSON file
+def load_google_oauth_config():
+    config_path = Path(__file__).parent / "config" / "google_oauth.json"
+    try:
+        with open(config_path, 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        raise FileNotFoundError(
+            "Google OAuth configuration file not found. "
+            f"Please create {config_path} with your Google OAuth credentials."
+        )
+
+# Load Google OAuth configuration
+GOOGLE_CLIENT_CONFIG = load_google_oauth_config()
 
 # Email configuration
 EMAIL_CONFIG = {
