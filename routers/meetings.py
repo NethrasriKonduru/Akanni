@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import List, Optional
 from pydantic import BaseModel
 
-from google_calendar import GoogleCalendar
+# from google_calendar import GoogleCalendar
 from email_service import EmailService
 from database import get_db
 from sqlalchemy.orm import Session
@@ -25,20 +25,29 @@ async def schedule_meeting(meeting: MeetingCreate, db: Session = Depends(get_db)
     Schedule a new Google Meet meeting and send invitations
     """
     try:
-        # Initialize Google Calendar service
-        calendar = GoogleCalendar()
+        # Google Calendar integration is currently disabled
+        # calendar = GoogleCalendar()
+        # meeting_details = calendar.create_meeting(
+        #     summary=meeting.title,
+        #     description=meeting.description or "",
+        #     start_time=meeting.start_time,
+        #     end_time=meeting.end_time,
+        #     attendees_emails=meeting.attendees
+        # )
         
-        # Create the meeting
-        meeting_details = calendar.create_meeting(
-            summary=meeting.title,
-            description=meeting.description or "",
-            start_time=meeting.start_time,
-            end_time=meeting.end_time,
-            attendees_emails=meeting.attendees
-        )
+        # Create a placeholder response
+        meeting_details = {
+            "id": "local_meeting_" + str(hash(meeting.title + str(meeting.start_time))),
+            "summary": meeting.title,
+            "description": meeting.description or "",
+            "start": {"dateTime": meeting.start_time.isoformat()},
+            "end": {"dateTime": meeting.end_time.isoformat()},
+            "hangoutLink": "#google-calendar-disabled",
+            "status": "confirmed"
+        }
         
         # Add meeting link to the details
-        meeting_details['meet_link'] = meeting_details.get('hangout_link', '')
+        meeting_details['meet_link'] = meeting_details.get('hangoutLink', '')
         
         # Send email invitations
         email_service = EmailService()
@@ -69,30 +78,25 @@ async def get_meeting(meeting_id: str):
     Get meeting details by ID
     """
     try:
-        calendar = GoogleCalendar()
-        event = calendar.service.events().get(
-            calendarId='primary',
-            eventId=meeting_id,
-            timeZone='UTC'
-        ).execute()
+        # Google Calendar integration is currently disabled
+        # calendar = GoogleCalendar()
+        # event = calendar.service.events().get(
+        #     calendarId='primary',
+        #     eventId=meeting_id,
+        # ).execute()
+        # 
+        # if not event:
+        #     raise HTTPException(status_code=404, detail="Meeting not found")
+        #     
+        # return event
         
-        if not event:
-            raise HTTPException(status_code=404, detail="Meeting not found")
-            
+        # Return a placeholder response
         return {
-            "status": "success",
-            "meeting": {
-                "id": event.get('id'),
-                "title": event.get('summary'),
-                "description": event.get('description'),
-                "start_time": event['start'].get('dateTime'),
-                "end_time": event['end'].get('dateTime'),
-                "meet_link": event.get('hangoutLink'),
-                "attendees": [a.get('email') for a in event.get('attendees', [])],
-                "status": event.get('status'),
-                "created": event.get('created'),
-                "updated": event.get('updated')
-            }
+            "id": meeting_id,
+            "summary": "Google Calendar Integration Disabled",
+            "description": "This feature is currently disabled",
+            "status": "tentative",
+            "htmlLink": "#google-calendar-disabled"
         }
         
     except Exception as e:

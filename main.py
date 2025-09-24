@@ -1,21 +1,43 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, status, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
+from pydantic import BaseModel
+from datetime import datetime
 import uvicorn
 import os
 
 from database import get_db, Base, engine
-from routers import meetings
+from routers import auth_router, calendar_router
+from routers.testimonials import router as testimonials_router
+from auth_utils import get_current_active_user, oauth2_scheme
+from models.user import User
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="Department Services API",
-    description="API for managing departments, services, and scheduling meetings",
+    title="Google Calendar Integration API",
+    description="API for Google Calendar integration with OAuth2 authentication",
     version="1.0.0"
 )
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, replace with specific origins
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Mount static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Templates
+templates = Jinja2Templates(directory="templates")
 
 # Enable CORS
 app.add_middleware(
@@ -43,15 +65,35 @@ class DepartmentBase(BaseModel):
         orm_mode = True
 
 # Include routers
-app.include_router(meetings.router, prefix="/api/v1", tags=["Meetings"])
+app.include_router(auth_router, prefix="/api/v1")
+app.include_router(calendar_router, prefix="/api/v1")
+app.include_router(testimonials_router)
 
 # API Endpoints
 @app.get("/")
 async def root():
     return {
-        "message": "Welcome to Department Services API",
+        "message": "Welcome to Google Calendar Integration API",
         "docs": "/docs",
         "redoc": "/redoc"
+    }
+
+# Health check endpoint
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}
+
+# Protected route example
+@app.get("/api/v1/protected")
+async def protected_route(current_user: User = Depends(get_current_active_user)):
+    return {
+        "message": "This is a protected route",
+        "user": {
+            "id": current_user.id,
+            "email": current_user.email,
+            "full_name": current_user.full_name,
+            "is_active": current_user.is_active
+        }
     }
 
 @app.get("/departments/", response_model=List[DepartmentBase])
