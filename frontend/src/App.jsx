@@ -12,6 +12,7 @@ import JoinSection from "./components/JoinSection";
 import About from "./components/Aboutus";
 import JoinFormPage from "./components/JoinFormPage"; // new form page
 
+// Home page component
 const HomePage = () => {
   return (
     <>
@@ -26,6 +27,7 @@ const HomePage = () => {
   );
 };
 
+// Main App component with routing
 const App = () => {
   return (
     <Router>
@@ -34,6 +36,7 @@ const App = () => {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/join-form" element={<JoinFormPage />} />
+        
       </Routes>
     </Router>
   );
