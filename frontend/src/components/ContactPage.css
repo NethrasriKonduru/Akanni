@@ -1,0 +1,92 @@
+/* Container */
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;       /* full viewport width */
+  height: 100vh;      /* full viewport height */
+  margin: 0;          /* remove default body margin */
+  padding: 0;         /* optional: remove padding */
+  background: #bfd6e9;
+  box-sizing: border-box; /* ensures padding/border doesn’t overflow */
+}
+
+/* Card */
+.contact-card {
+  display: flex;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  width: 750px;
+  overflow: hidden;
+}
+
+/* Left side form */
+.contact-form {
+  flex: 1;
+  padding: 40px;
+}
+
+.contact-form h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+}
+
+.contact-form textarea {
+  resize: none;
+  height: 100px;
+}
+
+.contact-form button {
+  padding: 12px;
+  background: #3b82f6;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-form button:hover {
+  background: #2563eb;
+}
+
+/* Right side illustration */
+.contact-illustration {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f0f6fc;
+}
+
+.contact-illustration img {
+ width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

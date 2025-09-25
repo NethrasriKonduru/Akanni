@@ -1,19 +1,27 @@
 .footer {
   background-color: #020000;
   color: #fff;
-  padding: 60px 80px;
   font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
 }
 
+/* Main container for top part */
 .footer-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 50px;
+  padding: 40px 60px; /* some breathing space */
 }
+
 .subscribe-message {
   padding-top: 20px;
 }
+
 /* Left Section */
 .footer-left {
   flex: 1;
@@ -51,18 +59,18 @@
 }
 
 .newsletter button {
-  background: #928b8b;        /* white background */
+  background: #928b8b;
   border: none;
   padding: 12px 20px;
-  color: #111;             /* dark icon color for contrast */
+  color: #111;
   font-size: 18px;
   cursor: pointer;
-  border-radius: 50px;     /* keep rounded look */
+  border-radius: 50px;
   transition: 0.3s ease;
 }
 
 .newsletter button:hover {
-  background: #f2f5f3;     /* light gray hover effect */
+  background: #f2f5f3;
 }
 
 .follow-text {
@@ -81,17 +89,18 @@
 }
 
 .social-icons svg:hover {
-  color: #1da1f2; /* hover effect */
+  color: #1da1f2;
 }
 
 /* Middle Section */
 .footer-middle {
   flex: 1;
   min-width: 200px;
+  
 }
 
 .footer-middle h3 {
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
@@ -106,16 +115,15 @@
   font-weight: 500;
 }
 
-/* ✅ Added for proper link styling */
 .footer-middle ul li a {
-  color: #fff;           /* matches footer theme */
+  color: #fff;
   text-decoration: none;
   transition: 0.3s;
 }
 
 .footer-middle ul li a:hover {
   text-decoration: underline;
-  color: #1da1f2;       /* hover color */
+  color: #1da1f2;
 }
 
 /* Right Section */
@@ -140,10 +148,44 @@
   display: flex;
   align-items: center;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .footer-right .whatsapp {
   color: #25d366;
   margin-right: 10px;
   font-size: 20px;
+}
+
+.footer-right .contact-item {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.footer-right .contact-icon {
+  color: #165bb6;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+/* ✅ Copyright Section */
+.footer-bottom {
+  background: #000000; /* dark black */
+  color: #fff;
+  font-size: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  padding: 10px 0;
+  margin: 0;
+  width: 100%;
+}
+
+.footer-bottom a {
+  color: #4cafef;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
 }
