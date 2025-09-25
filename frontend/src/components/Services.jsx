@@ -11,7 +11,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="services-section">
+    <section id="services" className="services-section">
       <h1 className="services-heading">Our Services</h1>
       <section className="services">
         {services.map((service, index) => (
