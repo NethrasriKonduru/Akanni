@@ -1,15 +1,25 @@
+
 .services {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 columns side by side */
   gap: 20px; /* space between boxes */
   padding: 40px;
+  background: var(--section-bg);
+}
+/* Center only the 5th card */
+.services .service-card:nth-child(5) {
+  grid-column: 1 / -1; /* span both columns */
+  justify-self: center; /* center horizontally */
+  max-width: 520px; /* optional: keep a nice readable width */
+  width: 100%;
 }
 .services-heading {
   text-align: center;
   margin-bottom: 20px;
+  color: var(--heading);
 }
 .service-card {
-  background-color: #f5f5f5;
+  background-color: var(--card-bg);
   padding: 30px;
   border-radius: 12px;
   text-align: center;
@@ -28,7 +38,7 @@
 }
 
 .service-card p {
-  color: #555;
+  color: var(--muted);
   font-size: 1rem;
 
 }
