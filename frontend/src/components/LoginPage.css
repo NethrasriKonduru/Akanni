@@ -1,104 +1,210 @@
+/* Full page login container */
 .login-page {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #f5f5f5;
-    padding: 20px;
+  display: flex;
+  justify-content: flex-end; /* form on the right */
+  align-items: center;        /* vertically center */
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Arial', sans-serif;
+  color: #fff; /* text on background */
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  padding-right: 60px; /* space from right edge */
+}
+
+/* Login card (transparent, no white background) */
+.login-card {
+  width: 400px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Title */
+.login-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #000; /* black heading */
+  text-shadow: none;
+}
+
+/* Form group */
+.login-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.login-form label {
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #000; /* black labels */
+  text-shadow: none;
+}
+
+.login-form input {
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.7);
+  font-size: 1rem;
+  background: rgba(0,0,0,0.3);
+  color: #fff;
+  outline: none;
+  transition: 0.3s;
+}
+
+.login-form input::placeholder {
+  color: rgba(255,255,255,0.8);
+}
+
+.login-form input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 8px rgba(108, 99, 255, 0.6);
+  background: rgba(0,0,0,0.4);
+}
+
+/* Error messages */
+.error {
+  color: #ffaaaa;
+  font-size: 0.85rem;
+  margin-top: 3px;
+}
+
+/* Login button */
+.login-btn {
+  width: 100%;
+  padding: 15px;
+  background: rgba(108, 99, 255, 0.8);
+  color: #fff;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: rgba(88, 72, 194, 0.9);
+}
+
+/* Divider */
+.divider {
+  text-align: center;
+  margin: 15px 0;
+  color: #fff;
+  font-weight: 500;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+
+/* Password toggle */
+.input-with-toggle {
+  position: relative;
+}
+.input-with-toggle input {
+  width: 100%;
+  padding-right: 40px;
+}
+.toggle-visibility {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Auth redirect */
+.auth-redirect {
+  text-align: center;
+  margin-top: 10px;
+}
+.link-button {
+  background: none;
+  border: none;
+  color: #2b6cb0;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+/* Google & LinkedIn buttons */
+.google-btn,
+.linkedin-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.google-btn img,
+.linkedin-btn img {
+  width: 20px;
+  margin-right: 10px;
+}
+
+/* Google button style */
+.google-btn {
+  background: rgba(255,255,255,0.9);
+  color: #444;
+  border: none;
+}
+
+.google-btn:hover {
+  background: rgba(255,255,255,1);
+}
+
+/* LinkedIn button style */
+.linkedin-btn {
+  background-color: rgba(0, 119, 181, 0.85);
+  color: white;
+  border: none;
+}
+
+.linkedin-btn:hover {
+  background-color: rgba(0, 119, 181, 1);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .login-page {
+    padding-right: 40px;
   }
-  
+
   .login-card {
-    background: #fff;
-    padding: 40px 30px;
-    border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-    max-width: 400px;
-    width: 100%;
+    width: 350px;
   }
-  
+}
+
+@media (max-width: 768px) {
+  .login-page {
+    justify-content: center; /* center on smaller screens */
+    padding-right: 0;
+  }
+
+  .login-card {
+    width: 90%;
+  }
+
   .login-title {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2rem;
-    color: #333;
+    font-size: 1.6rem;
   }
-  
-  .login-form .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+
+  .login-form input,
+  .login-btn,
+  .google-btn,
+  .linkedin-btn {
+    font-size: 0.95rem;
+    padding: 10px;
   }
-  
-  .login-form label {
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #555;
-  }
-  
-  .login-form input {
-    padding: 12px 15px;
-    border-radius: 12px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    transition: 0.3s;
-  }
-  
-  .login-form input:focus {
-    border-color: #6c63ff;
-    outline: none;
-    box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
-  }
-  
-  .error {
-    color: red;
-    font-size: 0.9rem;
-    margin-top: 5px;
-  }
-  
-  .login-btn {
-    width: 100%;
-    padding: 15px;
-    background: #6c63ff;
-    color: #fff;
-    font-size: 1.1rem;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: 0.3s;
-  }
-  
-  .login-btn:hover {
-    background: #5848c2;
-  }
-  
-  .divider {
-    text-align: center;
-    margin: 20px 0;
-    color: #888;
-    font-weight: 500;
-  }
-  
-  .google-btn {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    transition: 0.3s;
-  }
-  
-  .google-btn img {
-    width: 20px;
-    margin-right: 10px;
-  }
-  
-  .google-btn:hover {
-    background: #f0f0f0;
-  }
-  
+}
