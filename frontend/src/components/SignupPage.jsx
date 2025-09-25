@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import "./SignupPage.css";
+import background from "./images/background.jpg";
+import { FcGoogle } from "react-icons/fc";
+import { FaLinkedin } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function SignupPage() {
   const [formData, setFormData] = useState({
@@ -10,6 +15,9 @@ function SignupPage() {
   });
 
   const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -40,78 +48,114 @@ function SignupPage() {
     if (validate()) {
       console.log("Form Data:", formData);
       alert("Signup Successful!");
-      // Add API call here
     }
   };
 
   return (
-    <div className="signup-page">
-      <div className="signup-card">
-        <h2 className="signup-title">Create Your Account</h2>
+    <div
+      className="signup-page"
+      style={{
+        backgroundImage: `url(${background})`,
+      }}
+    >
+      <div className="signup-page-left"></div> {/* empty left space */}
+      <div className="signup-page-right">
+        <div className="signup-card">
+          <h2 className="signup-title">Create Your Account</h2>
 
-        <form onSubmit={handleSubmit} className="signup-form">
-          <div className="form-group">
-            <label>Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-            />
-            {errors.name && <span className="error">{errors.name}</span>}
+          <form onSubmit={handleSubmit} className="signup-form">
+            <div className="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+              {errors.name && <span className="error">{errors.name}</span>}
+            </div>
+
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+              {errors.email && <span className="error">{errors.email}</span>}
+            </div>
+
+            <div className="form-row">
+              <div className="form-group form-col">
+                <label>Password</label>
+                <div className="input-with-toggle">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                  <button
+                    type="button"
+                    className="toggle-visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
+                {errors.password && (
+                  <span className="error">{errors.password}</span>
+                )}
+              </div>
+
+              <div className="form-group form-col">
+                <label>Confirm Password</label>
+                <div className="input-with-toggle">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                  />
+                  <button
+                    type="button"
+                    className="toggle-visibility"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+                  >
+                    {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
+                {errors.confirmPassword && (
+                  <span className="error">{errors.confirmPassword}</span>
+                )}
+              </div>
+            </div>
+
+            <button type="submit" className="signup-btn">
+              Signup
+            </button>
+
+            <div className="divider">OR</div>
+
+            <button type="button" className="google-btn">
+              <FcGoogle size={24} style={{ marginRight: "10px" }} />
+              Continue with Google
+            </button>
+
+            <button type="button" className="linkedin-btn">
+              <FaLinkedin size={24} style={{ marginRight: "10px" }} />
+              Continue with LinkedIn
+            </button>
+          </form>
+
+          <div className="auth-redirect">
+            Already have an account? {" "}
+            <button type="button" className="link-button" onClick={() => navigate("/login")}>Log in</button>
           </div>
-
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-            {errors.email && <span className="error">{errors.email}</span>}
-          </div>
-
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-            {errors.password && (
-              <span className="error">{errors.password}</span>
-            )}
-          </div>
-
-          <div className="form-group">
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-            />
-            {errors.confirmPassword && (
-              <span className="error">{errors.confirmPassword}</span>
-            )}
-          </div>
-
-          <button type="submit" className="signup-btn">
-            Signup
-          </button>
-
-          <div className="divider">OR</div>
-
-          <button type="button" className="google-btn">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-              alt="Google"
-            />
-            Continue with Google
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );
