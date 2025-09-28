@@ -1,11 +1,20 @@
 from fastapi import APIRouter, Depends, Request, HTTPException, status
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, JSONResponse
 from sqlalchemy.orm import Session
 from typing import Optional
 from urllib.parse import urlencode
+from datetime import datetime, timedelta
 
 from database import get_db
 from services.oauth_service import OAuthService
+from models.user import User
+from schemas.auth import UserCreate, UserInDB, UserLogin, Token
+from auth_utils import (
+    get_password_hash,
+    verify_password,
+    create_access_token,
+    ACCESS_TOKEN_EXPIRE_MINUTES,
+)
 
 router = APIRouter(tags=["Authentication"])
 
@@ -91,6 +100,74 @@ async def revoke(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Failed to revoke token"
         )
+
+@router.post("/register", response_model=UserInDB, status_code=status.HTTP_201_CREATED)
+async def register_user(
+    user: UserCreate,
+    db: Session = Depends(get_db)
+):
+    """
+    Register a new user.
+    
+    Args:
+        user: User registration data including email, full_name, and password
+        db: Database session
+        
+    Returns:
+        UserInDB: The created user object
+        
+    Raises:
+        HTTPException: If email is already registered
+    """
+    # Check if user with this email already exists
+    db_user = db.query(User).filter(User.email == user.email).first()
+    if db_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email already registered"
+        )
+    
+    # Create new user
+    hashed_password = get_password_hash(user.password)
+    db_user = User(
+        email=user.email,
+        full_name=user.full_name,
+        hashed_password=hashed_password,
+        is_active=True,
+        created_at=datetime.utcnow()
+    )
+    
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    
+    return db_user
+
+@router.post("/login", response_model=Token)
+async def login_user(
+    creds: UserLogin,
+    db: Session = Depends(get_db)
+):
+    """
+    Authenticate user with email and password, return JWT access token.
+    """
+    user = db.query(User).filter(User.email == creds.email).first()
+    if not user or not user.hashed_password:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
+    
+    if not verify_password(creds.password, user.hashed_password):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
+    
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(
+        data={"sub": str(user.id)}, expires_delta=access_token_expires
+    )
+    
+    user.last_login = datetime.utcnow()
+    db.add(user)
+    db.commit()
+    
+    return {"access_token": access_token, "token_type": "bearer"}
 
 @router.get("/status")
 async def auth_status(
