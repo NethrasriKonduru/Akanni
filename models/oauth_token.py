@@ -15,7 +15,7 @@ class OAuthToken(Base):
     __tablename__ = 'oauth_tokens'
     
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(String(USER_ID_LENGTH), ForeignKey('users.id'), unique=True, index=True, nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'), unique=True, index=True, nullable=False)
     access_token = Column(Text, nullable=False)
     refresh_token = Column(Text, nullable=True)
     token_uri = Column(String(TOKEN_URI_LENGTH), nullable=False)

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Testimonials</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px 0;
+        }
+        .video-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        .video-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        .video-title {
+            padding: 15px;
+            font-weight: bold;
+            text-align: center;
+            color: #444;
+        }
+        
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .video-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        .video-container {
+            width: 90%;
+            max-width: 1000px;
+            position: relative;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            background: rgba(0,0,0,0.5);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: background 0.2s ease;
+        }
+        .close-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .video-info {
+            color: white;
+            padding: 15px;
+            background: rgba(0,0,0,0.7);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .videos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            .video-card img {
+                height: 160px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            .videos-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-container">
+            <button class="close-btn" onclick="closeVideo()">&times;</button>
+            <video id="testimonialVideo" controls>
+                Your browser does not support the video tag.
+            </video>
+            <div id="videoInfo" class="video-info"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Video Testimonials</h1>
+        <p>Click on any testimonial to watch the video</p>
+        
+        <div class="videos-grid">
+            <!-- Testimonial 1 -->
+            <div class="video-card" onclick="playVideo('demo1.mp4', 'Customer Testimonial - John Doe')">
+                <img src="/static/thumbnails/thumb1.jpg" alt="Testimonial 1" onerror="this.src='https://via.placeholder.com/300x200?text=Thumbnail+Not+Found'">
+                <div class="video-title">John's Success Story</div>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div class="video-card" onclick="playVideo('demo2.mp4', 'Customer Testimonial - Jane Smith')">
+                <img src="/static/thumbnails/thumb2.jpg" alt="Testimonial 2" onerror="this.src='https://via.placeholder.com/300x200?text=Thumbnail+Not+Found'">
+                <div class="video-title">Jane's Experience</div>
+            </div>
+            
+            <!-- Add more testimonials as needed -->
+        </div>
+    </div>
+    
+    <script>
+        // DOM Elements
+        const videoModal = document.getElementById('videoModal');
+        const testimonialVideo = document.getElementById('testimonialVideo');
+        const videoInfo = document.getElementById('videoInfo');
+        
+        // Play video function
+        function playVideo(videoSrc, title) {
+            // Set video source
+            const videoPath = `/api/v1/media/videos/${encodeURIComponent(videoSrc)}`;
+            testimonialVideo.src = videoPath;
+            
+            // Set video info
+            videoInfo.textContent = title;
+            
+            // Show modal with animation
+            videoModal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            
+            // Try to play video
+            const playPromise = testimonialVideo.play();
+            
+            // Handle autoplay restrictions
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log('Autoplay prevented:', error);
+                    // Show controls if autoplay is prevented
+                    testimonialVideo.controls = true;
+                });
+            }
+            
+            // Close modal when clicking outside the video
+            videoModal.onclick = function(event) {
+                if (event.target === videoModal) {
+                    closeVideo();
+                }
+            };
+            
+            // Close with Escape key
+            document.addEventListener('keydown', handleEscape);
+        }
+        
+        // Close video function
+        function closeVideo() {
+            videoModal.classList.remove('show');
+            document.body.style.overflow = ''; // Re-enable scrolling
+            testimonialVideo.pause();
+            testimonialVideo.currentTime = 0;
+            testimonialVideo.controls = false;
+            document.removeEventListener('keydown', handleEscape);
+        }
+        
+        // Handle Escape key press
+        function handleEscape(event) {
+            if (event.key === 'Escape') {
+                closeVideo();
+            }
+        }
+        
+        // Close video when it ends
+        testimonialVideo.addEventListener('ended', function() {
+            // Don't close, just stop at the end
+            testimonialVideo.controls = true;
+        });
+    </script>
+</body>
+</html>

@@ -12,6 +12,7 @@ import os
 from database import get_db, Base, engine
 from routers import auth_router, calendar_router
 from routers.testimonials import router as testimonials_router
+from routers.testimonial_api import router as testimonial_api_router
 from auth_utils import get_current_active_user, oauth2_scheme
 from models.user import User
 
@@ -35,6 +36,8 @@ app.add_middleware(
 
 # Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
+# Mount uploads directory for serving uploaded files
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 # Templates
 templates = Jinja2Templates(directory="templates")
@@ -68,6 +71,7 @@ class DepartmentBase(BaseModel):
 app.include_router(auth_router, prefix="/api/v1")
 app.include_router(calendar_router, prefix="/api/v1")
 app.include_router(testimonials_router)
+app.include_router(testimonial_api_router)
 
 # API Endpoints
 @app.get("/")

@@ -269,5 +269,5 @@ def get_media_type(extension: str) -> str:
 
 # Export the main router
 router = APIRouter()
-router.include_router(api_router, prefix="/media", tags=["Media"])
+router.include_router(api_router, prefix="/api/v1", tags=["Media"])
 router.include_router(web_router, tags=["Web UI"])
