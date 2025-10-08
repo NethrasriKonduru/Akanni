@@ -124,9 +124,9 @@ async def get_service(service_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Service not found")
     return service
 
-if __name__ == "__main__":
-    import uvicorn
-    import os
+# if __name__ == "__main__":
+#     import uvicorn
+#     import os
 
-    port = int(os.environ.get("PORT", 8000))  # Render sets this automatically
-    uvicorn.run("main:app", host="0.0.0.0", port=port)
+#     port = int(os.environ.get("PORT", 8000))  # Render sets this automatically
+#     uvicorn.run("main:app", host="0.0.0.0", port=port)
