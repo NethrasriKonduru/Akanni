@@ -76,7 +76,7 @@ def create_tables():
 db_was_created = ensure_database_exists()
 
 # Create database URL with psycopg2
-DATABASE_URL = "postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 # Create SQLAlchemy engine
 engine = create_engine(
