@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./SignupPage.css";
-import background from "./images/background.jpg";
 import { FcGoogle } from "react-icons/fc";
 import { FaLinkedin } from "react-icons/fa";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -54,9 +53,7 @@ function SignupPage() {
   return (
     <div
       className="signup-page"
-      style={{
-        backgroundImage: `url(${background})`,
-      }}
+      
     >
       <div className="signup-page-left"></div> {/* empty left space */}
       <div className="signup-page-right">

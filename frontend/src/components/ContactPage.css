@@ -7,7 +7,7 @@
   height: 100vh;      /* full viewport height */
   margin: 0;          /* remove default body margin */
   padding: 0;         /* optional: remove padding */
-  background: #bfd6e9;
+  background: #030303;
   box-sizing: border-box; /* ensures padding/border doesn’t overflow */
 }
 

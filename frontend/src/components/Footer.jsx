@@ -29,12 +29,11 @@ const Footer = () => {
     console.log("Subscribed with email:", email);
     setMessage("✅ Thank you for subscribing!");
     setEmail("");
-  };
+  }
 
   return (
     <footer className="footer">
       <div className="footer-container">
-        {/* Left Section */}
         <div className="footer-left">
           <h2>Subscribe to stay in touch with the latest Services.</h2>
           <div className="newsletter">
@@ -128,7 +127,7 @@ const Footer = () => {
               href="https://www.google.com/maps/place/Kothrud,+Pune,+Maharashtra"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ textDecoration: "none", color: "inherit" }}
+              style={{ textDecoration: "none", color: "blue" }}
             >
               <FaMapMarkerAlt className="contact-icon" /> Kothrud, Pune 411038
             </a>

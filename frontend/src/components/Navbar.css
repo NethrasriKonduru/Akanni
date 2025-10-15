@@ -1,3 +1,4 @@
+/* Navbar container */
 .navbar {
   width: 100%;
   padding: 0.5rem 2%;
@@ -6,39 +7,11 @@
   left: 0;
   right: 0;
   z-index: 100;
+  background: #111; /* static dark color */
   box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-  transition: all 0.4s ease; /* smooth mode switch */
+  transition: all 0.4s ease;
 }
 
-/* Light mode */
-.navbar.light {
-  background: white;
-}
-.navbar.light .logo-text {
-  color: black;
-}
-.navbar.light .nav-links li {
-  color: black;
-}
-.navbar.light .mobile-menu-icon {
-  color: black;
-}
-
-/* Dark mode */
-.navbar.dark {
-  background: #111;
-}
-.navbar.dark .logo-text {
-  color: white;
-}
-.navbar.dark .nav-links li {
-  color: white;
-}
-.navbar.dark .mobile-menu-icon {
-  color: white;
-}
-
-/* Shared styles */
 .nav-container {
   display: flex;
   justify-content: space-between;
@@ -47,6 +20,7 @@
   margin: 0 auto;
 }
 
+/* Logo */
 .logo-container {
   display: flex;
   align-items: center;
@@ -63,65 +37,59 @@
   transition: all 0.3s ease-in-out;
 }
 
-.logo-img.big {
-  width: 150px;
-  height: 150px;
-}
-
 .logo-text {
   font-size: 1.1rem;
   font-weight: bold;
-  transition: color 0.3s ease;
+  color: white;
 }
 
+/* Navigation links */
 .nav-links {
   display: flex;
   list-style: none;
   gap: 0.8rem;
-  transition: color 0.3s ease;
-  margin-left: auto; /* push links to the right */
+  margin-left: auto;
   align-items: center;
 }
 
 .nav-links li {
   cursor: pointer;
   font-weight: 500;
-  transition: color 0.2s, background-color 0.2s;
   padding: 4px 8px;
   border-radius: 8px;
 }
 
-.nav-links li:hover {
-  color: #f0a500;
+.nav-links li .nav-link {
+  color: white; /* links always white */
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
-/* Toggle button */
-.mode-toggle {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin-left: 1rem;
-  transition: transform 0.3s ease;
-}
-.mode-toggle:hover {
-  transform: rotate(20deg);
+.nav-links li.active .nav-link {
+  color: white; /* active link stays white */
 }
 
+.nav-links li:hover .nav-link {
+  color: #f0a500; /* hover highlight */
+}
+
+/* Mobile menu button */
 .mobile-menu-icon {
   display: none;
   font-size: 1.5rem;
   cursor: pointer;
   background: none;
   border: none;
+  color: white;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .nav-links {
     position: absolute;
     top: 100%;
     right: 0;
-    background: inherit;
+    background: #111;
     flex-direction: column;
     width: 100%;
     max-height: 0;
@@ -136,6 +104,10 @@
   .nav-links li {
     margin: 1rem 0;
     font-size: 1.2rem;
+  }
+
+  .nav-links li .nav-link {
+    color: white; /* mobile links white */
   }
 
   .mobile-menu-icon {

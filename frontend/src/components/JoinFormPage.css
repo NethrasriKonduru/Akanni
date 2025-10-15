@@ -1,149 +1,148 @@
-/* JoinFormPage.css */
+/* Join Page Section - Testimonial Style */
+.join-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 30px;
+  background: #121212; /* Dark background like testimonials */
+  font-family: "Arial", sans-serif;
+}
 
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-  }
-  
-  .form-page {
-    min-height: 100vh; /* full viewport height */
-    display: flex;
-    justify-content: center; /* horizontal center */
-    align-items: center;     /* vertical center */    /* light and clean background */
-    padding: 20px;
-   
-  }
-  
-  .form-card {
-    background: #ffffff;
-    border-radius: 25px;
-    padding: 50px 40px;
-    max-width: 700px;
-    width: 100%;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .form-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
-  }
-  
-  .form-title {
-    font-size: 2.5rem;
-    text-align: center;
-    color: #333;
-    margin-bottom: 5px;
-  }
-  
-  .form-subtitle {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 30px;
-  }
-  
-  .join-form .form-row {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    flex: 1;
-  }
-  
-  .form-group label {
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #555;
-  }
-  
-  .form-group input[type="text"],
-  .form-group input[type="email"],
-  .form-group input[type="tel"],
-  .form-group input[type="number"] {
-    padding: 12px 15px;
-    border-radius: 12px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    transition: 0.3s;
-  }
-  
-  .form-group input:focus {
-    border-color: #6c63ff;
-    outline: none;
-    box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
-  }
-  
-  .radio-group label {
-    margin-right: 25px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  
-  .radio-group input {
-    margin-right: 8px;
-  }
-  
-  .checkbox-group label {
-    display: block;
-    margin-bottom: 8px;
-    cursor: pointer;
-    font-weight: 500;
-  }
-  
-  .checkbox-group input {
-    margin-right: 8px;
-  }
-  
-  .submit-btn {
-    width: 100%;
-    padding: 15px;
-    background: #6c63ff;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .submit-btn:hover {
-    background: #5848c2;
-    transform: translateY(-2px);
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .join-form .form-row {
-      flex-direction: column;
-    }
-  
-    .form-card {
-      padding: 40px 20px;
-    }
-  }
-  /* Degree dropdown styling */
+/* Main Card */
+.join-card {
+  display: flex;
+  background: #1e1e1e; /* dark card background */
+  border-radius: 25px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  max-width: 1000px;
+  width: 100%;
+}
+
+/* ===== LEFT FORM SIDE ===== */
+.join-form-section {
+  flex: 1;
+  padding: 50px 40px;
+  color: #ddd;
+}
+
+.form-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.form-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #bbb;
+  margin-bottom: 25px;
+}
+
+.join-form .form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.form-group input,
 .form-group select {
-    padding: 12px 15px;
-    border-radius: 12px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    transition: 0.3s;
-    background: #fff;
-    appearance: none; /* removes default arrow in some browsers */
-    -webkit-appearance: none;
-    -moz-appearance: none;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  background: #2a2a2a;
+  color: #fff;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.form-group input::placeholder {
+  color: #aaa;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #0d6efd;
+  outline: none;
+  box-shadow: 0 0 12px rgba(13, 110, 253, 0.5);
+}
+
+.radio-group label,
+.checkbox-group label {
+  cursor: pointer;
+  color: #ccc;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  background: #0d6efd; /* testimonial-style blue */
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  background: #0b5ed7;
+  transform: translateY(-2px);
+}
+
+/* ===== RIGHT IMAGE SIDE ===== */
+.join-image-section {
+  flex: 1;
+  background: #2a2a2a; /* dark image background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  border-left: 1px solid #333;
+}
+
+.join-image-section img {
+  width: 90%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .join-card {
+    flex-direction: column;
   }
-  
-  .form-group select:focus {
-    border-color: #6c63ff;
-    outline: none;
-    box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
+
+  .join-form-section {
+    padding: 30px 25px;
   }
-  
+
+  .join-image-section {
+    padding: 20px;
+    border-left: none;
+    border-top: 1px solid #333;
+  }
+
+  .join-image-section img {
+    width: 70%;
+  }
+}

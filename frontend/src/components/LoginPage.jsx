@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import background from "./images/background.jpg"; // adjust path
 import "./LoginPage.css";
 import { FcGoogle } from "react-icons/fc";
 import { FaLinkedin } from "react-icons/fa";
@@ -41,14 +40,7 @@ function LoginPage() {
   return (
     <div
       className="login-page"
-      style={{
-        backgroundImage: `url(${background})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        width: "100vw",
-        height: "100vh",
-      }}
+      
     >
       <div className="login-page-right">
         <div className="login-card">

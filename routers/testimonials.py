@@ -25,7 +25,7 @@ router = APIRouter()
 router.include_router(api_router)
 router.include_router(web_router)
 
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="testimonials")
 
 # Base directories
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))

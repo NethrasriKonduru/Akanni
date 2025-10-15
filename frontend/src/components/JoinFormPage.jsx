@@ -1,140 +1,181 @@
 import React, { useState } from "react";
 import "./JoinFormPage.css";
+import joinImg from "../assets/join-illustration.jpg"; // replace with your actual image
 
-function JoinFormPage() {
+const JoinFormPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     contact: "",
     degree: "",
-    customDegree: "",
-    isStudying: "",
-    course: "",
+    studying: "",
+    studyingDetails: "",
     experience: "",
     domains: [],
   });
 
-  const services = ["AI Graphics", "Web & UI/UX", "Digital Marketing", "Analytics & Research", "Cybersecurity"];
-  
-  const degreeOptions = [
-    "High School",
-    "Diploma",
-    "B.Sc",
-    "B.Com",
-    "B.A",
-    "B.Tech",
-    "M.Sc",
-    "M.Com",
-    "M.A",
-    "MBA",
-    "Other"
-  ];
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
     if (type === "checkbox") {
-      let updatedDomains = [...formData.domains];
-      if (checked) updatedDomains.push(value);
-      else updatedDomains = updatedDomains.filter((d) => d !== value);
-      setFormData({ ...formData, domains: updatedDomains });
+      setFormData((prev) => {
+        const updatedDomains = checked
+          ? [...prev.domains, value]
+          : prev.domains.filter((d) => d !== value);
+        return { ...prev, domains: updatedDomains };
+      });
     } else {
-      setFormData({ ...formData, [name]: value });
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Use customDegree if degree === 'Other'
-    const finalDegree = formData.degree === "Other" ? formData.customDegree : formData.degree;
-    console.log({ ...formData, degree: finalDegree });
-    alert("Form submitted! Check console for details.");
+    console.log(formData);
+    alert("Form submitted!");
   };
 
   return (
-    <div className="form-page">
-      <div className="form-card">
-        <h2 className="form-title">Join Akanni</h2>
-        <p className="form-subtitle">Become part of our amazing community</p>
-        <form onSubmit={handleSubmit} className="join-form">
+    <div className="join-page">
+      <div className="join-card">
+        {/* Left Side - Form */}
+        <div className="join-form-section">
+          <h1 className="form-title">Join Akanni</h1>
+          <p className="form-subtitle">Let’s start your journey with us!</p>
 
-          <div className="form-row">
+          <form className="join-form" onSubmit={handleSubmit}>
+            {/* Name and Email */}
+            <div className="form-row">
+              <div className="form-group">
+                <label>Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            {/* Contact Number */}
             <div className="form-group">
-              <label>Name</label>
-              <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+              <label>Contact Number</label>
+              <input
+                type="tel"
+                name="contact"
+                required
+                value={formData.contact}
+                onChange={handleChange}
+              />
             </div>
-            <div className="form-group">
-              <label>Email</label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+
+            {/* Are you studying? */}
+            <div className="form-group radio-group">
+              <label>Are you studying?</label>
+              <div>
+                <label>
+                  <input
+                    type="radio"
+                    name="studying"
+                    value="Yes"
+                    onChange={handleChange}
+                  />{" "}
+                  Yes
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="studying"
+                    value="No"
+                    onChange={handleChange}
+                  />{" "}
+                  No
+                </label>
+              </div>
             </div>
-          </div>
 
-          <div className="form-group">
-            <label>Contact Number</label>
-            <input type="tel" name="contact" value={formData.contact} onChange={handleChange} required />
-          </div>
+            {/* Conditional Fields */}
+            {formData.studying === "Yes" && (
+              <div className="form-group">
+                <label>What are you studying?</label>
+                <select
+                  name="studyingDetails"
+                  required
+                  value={formData.studyingDetails}
+                  onChange={handleChange}
+                >
+                  <option value="">Select</option>
+                  <option value="B.Tech">B.Tech</option>
+                  <option value="M.Tech">M.Tech</option>
+                  <option value="B.Sc">B.Sc</option>
+                  <option value="BBA">BBA</option>
+                  <option value="MBA">MBA</option>
+                  <option value="Schooling">Schooling</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            )}
 
-          {/* Degree dropdown */}
-          <div className="form-group">
-            <label>Degree</label>
-            <select name="degree" value={formData.degree} onChange={handleChange} required>
-              <option value="">Select your degree</option>
-              {degreeOptions.map((deg) => (
-                <option key={deg} value={deg}>{deg}</option>
-              ))}
-            </select>
-          </div>
+            {formData.studying === "No" && (
+              <div className="form-group">
+                <label>Experience (years)</label>
+                <input
+                  type="number"
+                  name="experience"
+                  placeholder="Enter your work experience"
+                  value={formData.experience}
+                  onChange={handleChange}
+                />
+              </div>
+            )}
 
-          {/* Show custom input if Other is selected */}
-          {formData.degree === "Other" && (
-            <div className="form-group">
-              <label>Enter your degree</label>
-              <input type="text" name="customDegree" value={formData.customDegree} onChange={handleChange} required />
-            </div>
-          )}
-
-          <div className="form-group">
-            <label>Are you studying?</label>
-            <div className="radio-group">
-              <label>
-                <input type="radio" name="isStudying" value="yes" checked={formData.isStudying === "yes"} onChange={handleChange} required /> Yes
-              </label>
-              <label>
-                <input type="radio" name="isStudying" value="no" checked={formData.isStudying === "no"} onChange={handleChange} /> No
-              </label>
-            </div>
-          </div>
-
-          {formData.isStudying === "yes" && (
-            <div className="form-group">
-              <label>What are you studying?</label>
-              <input type="text" name="course" value={formData.course} onChange={handleChange} required />
-            </div>
-          )}
-
-          {formData.isStudying === "no" && (
-            <div className="form-group">
-              <label>Work Experience (years)</label>
-              <input type="number" name="experience" value={formData.experience} onChange={handleChange} required />
-            </div>
-          )}
-
-          <div className="form-group">
-            <label>Interested Domains/Services</label>
-            <div className="checkbox-group">
-              {services.map((service) => (
-                <label key={service}>
-                  <input type="checkbox" name="domains" value={service} checked={formData.domains.includes(service)} onChange={handleChange} />
-                  {service}
+            {/* Interested Domains */}
+            <div className="form-group checkbox-group">
+              <label>Interested Domains/Services</label>
+              {[
+                "AI Graphics",
+                "Web & UI/UX",
+                "Digital Marketing",
+                "Analytics & Research",
+                "Cybersecurity",
+              ].map((domain) => (
+                <label key={domain}>
+                  <input
+                    type="checkbox"
+                    name="domains"
+                    value={domain}
+                    onChange={handleChange}
+                  />{" "}
+                  {domain}
                 </label>
               ))}
             </div>
-          </div>
 
-          <button type="submit" className="submit-btn">Join Now</button>
-        </form>
+            <button className="submit-btn" type="submit">
+              Join Now
+            </button>
+          </form>
+        </div>
+
+        {/* Right Side - Image */}
+        <div className="join-image-section">
+          <img src={joinImg} alt="Join Akanni" />
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default JoinFormPage;

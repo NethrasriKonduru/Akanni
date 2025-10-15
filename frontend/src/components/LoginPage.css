@@ -1,150 +1,167 @@
-/* Full page login container */
-.login-page {
-  display: flex;
-  justify-content: flex-end; /* form on the right */
-  align-items: center;        /* vertically center */
-  width: 100vw;
-  height: 100vh;
-  font-family: 'Arial', sans-serif;
-  color: #fff; /* text on background */
-  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-  padding-right: 60px; /* space from right edge */
+/* Clean, modern login page design (dark glassy style) */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Login card (transparent, no white background) */
-.login-card {
-  width: 400px;
-  max-width: 90%;
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0a0a0a, #1c1c1c);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* Page container */
+.login-page {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+/* Login card */
+.login-card {
+  width: 500px;
+  max-width: 90%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+  padding: 35px 30px;
+  transition: all 0.3s ease;
+}
+
+.login-card:hover {
+  box-shadow: 0 0 35px rgba(108, 99, 255, 0.4);
 }
 
 /* Title */
 .login-title {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 2rem;
-  color: #000; /* black heading */
-  text-shadow: none;
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  letter-spacing: 0.5px;
+  color: #fff;
 }
 
-/* Form group */
+/* Input groups */
 .login-form .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
+  width: 100%; /* ✅ ensures consistent width */
 }
 
 .login-form label {
-  margin-bottom: 5px;
-  font-weight: 500;
-  color: #000; /* black labels */
-  text-shadow: none;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: #ccc;
 }
 
 .login-form input {
+  width: 100%; /* ✅ makes all inputs equal width */
   padding: 12px 15px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.7);
   font-size: 1rem;
-  background: rgba(0,0,0,0.3);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   color: #fff;
   outline: none;
-  transition: 0.3s;
-}
-
-.login-form input::placeholder {
-  color: rgba(255,255,255,0.8);
+  transition: 0.3s ease;
+  box-sizing: border-box; /* ✅ avoids width differences due to padding */
 }
 
 .login-form input:focus {
   border-color: #6c63ff;
   box-shadow: 0 0 8px rgba(108, 99, 255, 0.6);
-  background: rgba(0,0,0,0.4);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-/* Error messages */
+/* Password field with toggle */
+.input-with-toggle {
+  position: relative;
+  width: 100%; /* ✅ ensures toggle icon doesn’t shrink the input */
+}
+
+.input-with-toggle input {
+  width: 100%;
+  padding-right: 40px; /* ✅ space for eye icon */
+}
+
+.toggle-visibility {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.toggle-visibility:hover {
+  color: #fff;
+}
+
+/* Error text */
 .error {
-  color: #ffaaaa;
+  color: #ff6b6b;
   font-size: 0.85rem;
-  margin-top: 3px;
+  margin-top: 5px;
 }
 
 /* Login button */
 .login-btn {
   width: 100%;
-  padding: 15px;
-  background: rgba(108, 99, 255, 0.8);
-  color: #fff;
-  font-size: 1.1rem;
+  padding: 14px;
+  margin-top: 10px;
   border: none;
   border-radius: 12px;
+  background: linear-gradient(135deg, #6c63ff, #5548d9);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
   cursor: pointer;
-  margin-top: 10px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .login-btn:hover {
-  background: rgba(88, 72, 194, 0.9);
+  background: linear-gradient(135deg, #7e75ff, #6c63ff);
+  box-shadow: 0 0 12px rgba(108, 99, 255, 0.6);
 }
 
 /* Divider */
 .divider {
   text-align: center;
-  margin: 15px 0;
-  color: #fff;
+  margin: 20px 0;
+  color: #aaa;
   font-weight: 500;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  letter-spacing: 0.5px;
 }
 
-/* Password toggle */
-.input-with-toggle {
-  position: relative;
-}
-.input-with-toggle input {
-  width: 100%;
-  padding-right: 40px;
-}
-.toggle-visibility {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  padding: 0;
-}
-
-/* Auth redirect */
-.auth-redirect {
-  text-align: center;
-  margin-top: 10px;
-}
-.link-button {
-  background: none;
-  border: none;
-  color: #2b6cb0;
-  cursor: pointer;
-  text-decoration: underline;
-  padding: 0;
-}
-
-/* Google & LinkedIn buttons */
+/* Social buttons */
 .google-btn,
 .linkedin-btn {
   width: 100%;
   padding: 12px;
   border-radius: 12px;
-  cursor: pointer;
   font-size: 1rem;
+  font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
-  transition: 0.3s;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  border: none;
 }
 
 .google-btn img,
@@ -153,58 +170,60 @@
   margin-right: 10px;
 }
 
-/* Google button style */
 .google-btn {
-  background: rgba(255,255,255,0.9);
-  color: #444;
-  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
 }
 
 .google-btn:hover {
-  background: rgba(255,255,255,1);
+  background: #fff;
+  transform: translateY(-1px);
 }
 
-/* LinkedIn button style */
 .linkedin-btn {
-  background-color: rgba(0, 119, 181, 0.85);
-  color: white;
-  border: none;
+  background: #0077b5;
+  color: #fff;
 }
 
 .linkedin-btn:hover {
-  background-color: rgba(0, 119, 181, 1);
+  background: #005f91;
+  transform: translateY(-1px);
 }
 
-/* Responsive design */
-@media (max-width: 1024px) {
-  .login-page {
-    padding-right: 40px;
-  }
-
-  .login-card {
-    width: 350px;
-  }
+/* Auth redirect text */
+.auth-redirect {
+  text-align: center;
+  margin-top: 15px;
+  color: #aaa;
 }
 
-@media (max-width: 768px) {
-  .login-page {
-    justify-content: center; /* center on smaller screens */
-    padding-right: 0;
-  }
+.link-button {
+  background: none;
+  border: none;
+  color: #6c63ff;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 500;
+}
 
+.link-button:hover {
+  color: #8b84ff;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
   .login-card {
-    width: 90%;
+    width: 100%;
+    padding: 25px 20px;
   }
 
   .login-title {
     font-size: 1.6rem;
   }
 
-  .login-form input,
   .login-btn,
   .google-btn,
   .linkedin-btn {
     font-size: 0.95rem;
-    padding: 10px;
   }
 }
